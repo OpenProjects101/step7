@@ -1,0 +1,392 @@
+ .container.login{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+    }
+
+  .login.form-group {
+    margin-bottom: 1px;
+    justify-content: space-between; 
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  .login.form-group.button{
+    display: flex;
+    width: 300px;
+  }
+
+  .login-btn.register {
+    width: 100px;
+    padding: 10px;
+    background-color: #f68b21;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    } 
+
+  .login-btn.register:hover {
+      background-color: #cf7720;
+    }
+
+  .login-btn.login {
+    width: 100px;
+    padding: 10px;
+    background-color: #5ec6f6;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    } 
+
+  .login-btn.login:hover {
+      background-color: #4ba7d2;
+    }
+  
+  .container.register {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .register.form-group {
+    margin-bottom: 1px;
+    justify-content: space-between; 
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  .register.form-group.button{
+    display: flex;
+    width: 300px;
+  }
+  
+  .register-btn.register {
+    width: 100px;
+    padding: 10px;
+    background-color: #f68b21;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    } 
+
+  .register-btn.register:hover {
+      background-color: #cf7720;
+    }
+
+  .back-btn.register {
+    width: 100px;
+    padding: 10px;
+    background-color: #5ec6f6;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    } 
+
+  .back-btn.register:hover {
+      background-color: #4ba7d2;
+    }
+
+  .alert {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f7200c;
+  }
+
+  .alert.success {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #f7200c;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 93%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .ProductList {
+    border-collapse: collapse; 
+    width: 100%; 
+  }
+
+  .ProductList th, td {
+    border: 1px solid #5b5a5a;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .ProductList th {
+    border-right: 0px; 
+    border-left: 0px; 
+  }
+
+  .ProductList tr {
+    border-bottom: 1px solid #5b5a5a; 
+  }
+
+  .btn.registerpage {
+    width: 80px;
+    padding: 3%;
+    background-color: #f68b21;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn.registerpage:hover {
+    background-color: #cf7720;
+    color: #000000;
+  }
+
+  .btn.detail{
+    width: 60px;
+    padding: 3%;
+    background-color: #08aaf6;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn.detail:hover {
+    background-color: #1082b6;
+  }
+
+  .btn.edit {
+    width: 70px;
+    padding: 0.8%;
+    background-color: #f68b21;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+
+  .btn.edit:hover {
+    background-color: #cf7720;
+    color: #000000;
+  }
+
+  .detail-btn.back{
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 70px;
+    padding: 0.8%;
+    background-color: #08aaf6;
+    color: #000000;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; 
+  }
+  
+  .detail-btn.back:hover {
+    background-color: #09567a;
+    color: #000000;
+  }
+
+  .btn.delete{
+    width: 60px;
+    padding: 3%;
+    background-color: #fa4f0b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn.delete:hover {
+    background-color: #a73609;
+    color: #ffffff;
+  }
+
+  .form-label {
+    margin-bottom: 1px;
+}
+
+  .btn.update {
+    width: 70px;
+    padding: 0.8%;
+    background-color: #f68b21;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn.update:hover {
+    background-color: #cf7720;
+    color: #000000;
+  }
+
+  .edit-btn.back{
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 70px;
+    padding: 0.8%;
+    background-color: #08aaf6;
+    color: #000000;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; 
+  }
+  
+  .edit-btn.back:hover {
+    background-color: #09567a;
+    color: #000000;
+  }
+
+  .table.edit {
+    flex-wrap: wrap; 
+    border: #5b5a5a 1px solid;
+    max-width: 600px;
+    padding:10px;
+    }
+
+  .table.detail {
+    display:  flex;
+    flex-wrap: wrap;
+    border: #5b5a5a 1px solid;
+    padding:10px;
+    max-width: 600px;
+  }
+
+  .table.detail dt {
+    width: 20%;
+  }
+
+  .table.detail dd {
+    width: 70%; 
+  }
+
+  .table.edit {
+  flex-wrap: wrap; 
+  border: #5b5a5a 1px solid;
+  max-width: 600px;
+  padding:10px;
+  }
+
+  .table.edit .form-group {
+    display: flex; 
+    margin-bottom: 1px;
+    width: 100%; 
+  }
+
+  .table.edit dt {
+    width: 20%;
+  }
+
+  .table.edit dd {
+    width: 50%; 
+  }
+
+  .register {
+    border-collapse: collapse; 
+    width: 100%; 
+  }
+
+  .btn.register {
+    width: 70px;
+    padding: 0.8%;
+    background-color: #f68b21;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn.register:hover {
+    background-color: #cf7720;
+    color: #000000;
+  }
+
+  .table.create {
+    flex-wrap: wrap; 
+    border: #5b5a5a 1px solid;
+    max-width: 600px;
+    padding:10px;
+  }
+
+  .table.create .create-group {
+    display: flex; 
+    margin-bottom: 1px;
+    width: 100%; 
+  }
+
+  .table.create dt {
+    width: 20%;
+  }
+
+  .table.create dd {
+    width: 60%; 
+  }
+
+  .create-btn.back{
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    width: 70px;
+    padding: 0.8%;
+    background-color: #08aaf6;
+    color: #000000;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: middle; 
+  }
+
+  .create-btn.back:hover {
+    background-color: #09567a;
+    color: #000000;
+  }
+
+  .required{
+    color: red;
+  }
+
+  .form.search {
+    display: flex;
+    width: 300px;
+  }
+
+  .search {
+    display: flex;       
+    align-items: center; 
+    gap: 10px; 
+  }
+
+  .search .form {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+    margin-top: 10px;
+  }
+
+  select { 
+    width: 100%; 
+    padding: 11px; 
+    border: 1px solid #ccc;
+    border-radius: 4px; 
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
