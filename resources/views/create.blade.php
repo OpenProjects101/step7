@@ -18,6 +18,15 @@
                         {{ session('success') }}
                     </div>
             @endif
+
+            @if($errors->any())
+                <div class="alert success">
+                    @foreach($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                </div>
+            @endif
+
             <div class="table create">
                 <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                     @csrf

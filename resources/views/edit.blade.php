@@ -19,6 +19,14 @@
                         </div>
                 @endif
 
+                @if($errors->any())
+                    <div class="alert success">
+                        @foreach($errors->all() as $error)
+                            {{ $error }}
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="table edit">
                     <form method="POST" action="{{ route('products.update', $product) }}" enctype="multipart/form-data">
                         @csrf

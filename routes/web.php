@@ -36,17 +36,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('/register', [RegisterController::class, 'showRegister'])->name('showRegister');
 Route::post('/register', [RegisterController::class, 'postRegister'])->name('postRegister');
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('products', ProductController::class);
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
-
-//GET /products → ProductController@index → products.index
-//GET /products/create → ProductController@create → products.create
-//POST /products → ProductController@store → products.store
-//GET /products/{product} → ProductController@show → products.show
-//GET /products/{product}/edit → ProductController@edit → products.edit
-//PUT/PATCH /products/{product} → ProductController@update → products.update
-//DELETE /products/{product} → ProductController@destroy → products.destroy
-
-//Route::get('/product', [ProductController::class, 'product'])->name('product');
-//Route::post('/productlist', [ProductlistController::class, 'productlist'])->name('postRegister');
-

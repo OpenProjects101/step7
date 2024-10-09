@@ -20,6 +20,14 @@
             </div>
           @endif
 
+          @if($errors->any())
+              <div class="alert success">
+                  @foreach($errors->all() as $error)
+                    {{ $error }}
+                  @endforeach
+              </div>
+          @endif
+
           <form action="{{ route('products.index') }}" method="GET" class="search">
             <div class="search product">
               <input type="text" name="search" class="form" placeholder="検索キーワード" value="{{ request('search') }}">

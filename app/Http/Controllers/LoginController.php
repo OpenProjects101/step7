@@ -11,14 +11,17 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(Request $request) {
+    public function login(
+        Request $request) {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],  
-            'password' => ['required'],
+            'email' => ['required', 'email','regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],  
+            'password' => ['required','regex:/^[a-zA-Z0-9]+$/'],
         ], [
             'email.required' => 'メールアドレスは必須です。',
             'email.email' => '有効なメールアドレスを入力してください。',
             'password.required' => 'パスワードは必須です。', 
+            'email.regex' => 'メールアドレスは半角英数字のみを使用してください。',
+            'password.regex' => 'パスワードは半角英数字のみを使用してください。',
         ]);
 
         if (Auth::attempt($credentials)) {

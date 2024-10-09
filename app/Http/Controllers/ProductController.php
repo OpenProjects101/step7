@@ -6,18 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\company;
 
-class ProductController extends Controller
-{
-    //**
-     //* Display a listing of the resource.
-     //*
-     //* @return \Illuminate\Http\Response
-     //*public function index(Request $request)
-    //public function index()
-    //{　$products = Product::all(); 
-       // return view('index', compact('products'));　}
-
+class ProductController extends Controller {
+    
     public function index(Request $request) {
+
+        $request->validate([
+            'search' => ['nullable','regex:/^[\p{L}\p{N}]+$/u',],
+        ], [
+            'search.regex' => '半角または全角の文字および数字で検索してください。',
+        ]);
+
         $companies = Company::all();
         $query = Product::with ('company');
 
@@ -34,30 +32,36 @@ class ProductController extends Controller
         return view('index', compact('products', 'companies', 'search','companyId'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create() {
-        $companies = Company::all();
+        try {
+            $companies = Company::all();
+        } catch (\Exception $e) {
+            Log::error('情報の取得に失敗しました: ' . $e->getMessage());
+            return redirect()->back()->with('error', '情報の取得に失敗しました。');
+        }
+
         return view('create', compact('companies'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
         $request->validate([
-            'product_name' => 'required',
-            'company_id' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'comment' => 'nullable', 
-            'img_path' => 'nullable|image',
+            'product_name' => ['required','regex:/^[\p{L}\p{N}]+$/u'],
+            'company_id' =>  ['required'],
+            'price' =>  ['required','regex:/^[a-zA-Z0-9]+$/'],
+            'stock' =>  ['required','regex:/^[a-zA-Z0-9]+$/'],
+            'comment' =>  ['nullable','regex:/^[\p{L}\p{N}]+$/u',], 
+            'img_path' => ['nullable','image'],
+        ], [
+            'product_name.required' => '商品名は必須です。',
+            'company_id.required' => 'メーカー名は必須です。',
+            'price.required' => '価格は必須です。',
+            'stock.required' => '在庫数は必須です。',
+            'product_name.regex' => '商品名は半角英数字・全角英数字のみを使用してください。',
+            'price.regex' => '価格は半角英数字のみを使用してください。',
+            'stock.regex' => '在庫数は半角英数字のみを使用してください。',
+            'comment.regex' => 'コメントは半角英数字・全角英数字のみを使用してください。',
+
         ]);
 
         $product = new Product([
@@ -79,64 +83,61 @@ class ProductController extends Controller
         return redirect()->route('products.create')->with('success', '商品が登録されました');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product) {
          return view('show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product) {
         $companies = Company::all();
         return view('edit', compact('product', 'companies'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Product $product) {
         $request->validate([
-            'product_name' => 'required',
-            'company_id'=> 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'comment' => 'nullable',
-            'img_path' => 'nullable|image',
+            'product_name' => ['required','regex:/^[\p{L}\p{N}]+$/u'],
+            'company_id'=> ['required'],
+            'price' => ['required','regex:/^[a-zA-Z0-9]+$/'],
+            'stock' => ['required','regex:/^[a-zA-Z0-9]+$/'],
+            'comment' => ['nullable','regex:/^[\p{L}\p{N}]+$/u'],
+            'img_path' =>['nullable','image'],
+        ], [
+            'product_name.required' => '商品名は必須です。',
+            'company_id.required' => 'メーカー名は必須です。',
+            'price.required' => '価格は必須です。',
+            'stock.required' => '在庫数は必須です。',
+            'product_name.regex' => '商品名は半角英数字・全角英数字のみを使用してください。',
+            'price.regex' => '価格は半角英数字のみを使用してください。',
+            'stock.regex' => '在庫数は半角英数字のみを使用してください。',
+            'comment.regex' => 'コメントは半角英数字・全角英数字のみを使用してください。',
         ]);
 
-        $product->product_name = $request->product_name;
-        $product->company_id = $request->company_id;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
+        try {
+            $product->product_name = $request->product_name;
+            $product->company_id = $request->company_id;
+            $product->price = $request->price;
+            $product->stock = $request->stock;
 
-        $product->save();
+            $product->save();
 
-        return redirect()->route('products.edit', $product->id)
-        ->with('success', '商品情報が更新されました');
-    }
+            return redirect()->route('products.edit', $product->id)
+            ->with('success', '商品情報が更新されました');
+        } catch (\Exception $e) {
+            Log::error('商品情報の更新に失敗しました: ' . $e->getMessage());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+            return redirect()->back()->with('error', '商品情報の更新に失敗しました。');
+         }
+    }  
+
     public function destroy($id) {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return redirect('/products')->with('success', '商品が削除されました');
+        try {
+            $product = Product::findOrFail($id);
+            $product->delete();
+
+            return redirect('/products')->with('success', '商品が削除されました');
+        } catch (\Exception $e) {
+        Log::error('商品の削除に失敗しました: ' . $e->getMessage());
+
+        return redirect('/products')->with('error', '商品の削除に失敗しました。');
+        }
     }
 }
