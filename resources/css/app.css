@@ -105,13 +105,30 @@
   }
 
   h2 {
-    text-align: center;
+    .search .form
     margin-bottom: 20px;
   }
+
+  #searchForm {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #searchForm .search {
+    flex: 1 1 45%;
+  }
+
+  #searchForm .btn.search {
+    display: flex;
+    justify-content: left; 
+    margin-bottom: 20px;
+  }
+
   
   input[type="text"],
+
   input[type="password"] {
-    width: 93%;
+    margin-bottom: 10px;width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -126,6 +143,7 @@
   .ProductList th, td {
     border: 1px solid #5b5a5a;
     text-align: center;
+    vertical-align: middle; 
     padding: 5px;
   }
 

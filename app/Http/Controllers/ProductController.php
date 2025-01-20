@@ -16,10 +16,9 @@ class ProductController extends Controller {
             'search.regex' => '半角または全角の文字および数字で検索してください。',
         ]);
 
-        $companies = Company::all();
-        $query = Product::with ('company');
+        $query = Product::with('company');
 
-        if ($search = $request->search) {
+        if ($search = $request->input('search')) {
             $query->where('product_name', 'LIKE', "%{$search}%");
         }
 
@@ -27,9 +26,39 @@ class ProductController extends Controller {
             $query->where('company_id', $companyId);
         }
 
-        $products = $query->paginate(10);
+        if ($priceMin = $request->input('price_min')) {
+            $query->where('price', '>=', $priceMin);
+        }
+    
+        if ($priceMax = $request->input('price_max')) {
+            $query->where('price', '<=', $priceMax);
+        }
+    
+        if ($stockMin = $request->input('stock_min')) {
+            $query->where('stock', '>=', $stockMin);
+        }
+    
+        if ($stockMax = $request->input('stock_max')) {
+            $query->where('stock', '<=', $stockMax);
+        }
+        
+        $sortColumn = $request->input('sort_column', 'id'); 
+        $sortOrder = $request->input('sort_order', 'asc'); 
+        $query->orderBy($sortColumn, $sortOrder);
 
-        return view('index', compact('products', 'companies', 'search','companyId'));
+        $query->leftJoin('companies', 'products.company_id', '=', 'companies.id')
+              ->select('products.*', 'companies.company_name as company_name')
+              ->orderBy($sortColumn, $sortOrder);
+
+        $products = $query->get(); 
+        
+
+        if ($request->ajax()) {
+            return response()->json(['products' => $products]);
+        }
+
+        $companies = Company::all();
+        return view('index', compact('products', 'companies'));
     }
 
 
@@ -133,11 +162,12 @@ class ProductController extends Controller {
             $product = Product::findOrFail($id);
             $product->delete();
 
-            return redirect('/products')->with('success', '商品が削除されました');
+            return response()->json(['success' => true, 'message' => '商品が削除されました。']);
         } catch (\Exception $e) {
-        Log::error('商品の削除に失敗しました: ' . $e->getMessage());
-
-        return redirect('/products')->with('error', '商品の削除に失敗しました。');
+          \Log::error('削除エラー: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => '削除に失敗しました。'], 500);
         }
+
     }
+    
 }
